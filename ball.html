@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+
+    <style type="text/css">
+        body {
+            background-color: white;
+        }
+
+        canvas {
+            border: 2px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Cory O'Donoghue</h1>
+    <canvas id="canvas-for-ball" width="500" height="400"></canvas>
+
+    <script type="text/javascript">
+        // Gets a handle to the element with id canvasOne.
+        var canvas = document.getElementById("canvas-for-ball");
+        // Get a 2D context for the canvas.
+        var ctx = canvas.getContext("2d");
+
+        // Ball class
+        class Ball {
+            constructor(x, y, r) {
+                this.x = x;
+                this.y = y;
+                this.r = r;
+                this.xv;
+                this.yv;
+                this.theta = 0;
+                this.thetaInc = 0.005;
+            }
+
+            draw() {
+                // Draw the ball (stroked, not filled).
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+
+                ctx.fillStyle = "yellow";
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            move() {
+                this.x += this.xv;
+                this.y += this.yv;
+
+                // If ball hits top or bottom
+                if (this.y > canvas.height - this.r || this.y - this.r < 0) {
+                    // Reverse direction
+                    this.yv = -1 * this.yv;
+                }
+                // If ball hits right or left wall
+                if (this.x > canvas.width - this.r || this.x - this.r < 0) {
+                    // Reverse direction
+                    this.xv = -1 * this.xv;
+                    // Reverse Rotation
+                    this.thetaInc *= -15;
+                }
+            }
+
+            resize(r) {
+                this.r = r;
+            }
+
+            rotateBall() {
+                this.theta += this.thetaInc;
+                ctx.beginPath();
+                for (var i = 1; i < 8; i++) {
+                    ctx.moveTo(this.x, this.y);
+                    let x1 = this.r * Math.cos((i / 7 + this.theta) * (Math.PI * 2)) + this.x;
+                    let y1 = this.r * Math.sin((i / 7 + this.theta) * (Math.PI * 2)) + this.y;
+                    ctx.lineTo(x1, y1);
+                }
+                ctx.stroke();
+            }
+        }
+        // Create instance of Ball
+        b = new Ball(50, 50, 30);
+        b.xv = b.yv = 2;
+        // A function to repeat every time the animation loops.
+        function repeatme() {
+            ctx.clearRect(0, 0, 500, 400);
+            b.draw();
+            b.rotateBall();
+            // Update the y location.
+            b.move();
+
+            window.requestAnimationFrame(repeatme);
+        }
+        // Get the animation going.
+        repeatme();
+    </script>
+
+</body>
+
+</html>

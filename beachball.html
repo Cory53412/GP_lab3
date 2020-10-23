@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+
+    <style type="text/css">
+
+    </style>
+
+</head>
+
+<body>
+
+    <canvas id="canvasOne" style="border:1px solid #000000;" width="500" height="450"></canvas>
+
+    <script type="text/javascript">
+        // Gets a handle to the element with id canvasOne.
+        // Gets a handle to the element with id canvasOne.
+        var canvas = document.getElementById("canvasOne");
+        // Set the canvas up for drawing in 2D.
+        var ctx = canvas.getContext("2d");
+
+        class BeachBall {
+            constructor(x, y, r, sAngle, eAngle, direction) {
+                this.x = x;
+                this.y = y;
+                this.r = r;
+                this.sAngle = sAngle;
+                this.eAngle = eAngle;
+            }
+
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.r, this.sAngle, this.eAngle, this.direction);
+                ctx.moveTo(this.x, this.y);
+
+
+                var a = this.r * Math.cos(2 * Math.PI / 7) + this.x;
+                var b = this.r * Math.sin(2 * Math.PI / 7) + this.y;
+                ctx.lineTo(a, b);
+                ctx.moveTo(this.x, this.y);
+
+                var a = this.r * Math.cos(4 * Math.PI / 7) + this.x;
+                var b = this.r * Math.sin(4 * Math.PI / 7) + this.y;
+                ctx.lineTo(a, b);
+                ctx.moveTo(this.x, this.y);
+
+                var a = this.r * Math.cos(6 * Math.PI / 7) + this.x;
+                var b = this.r * Math.sin(6 * Math.PI / 7) + this.y;
+                ctx.lineTo(a, b);
+                ctx.moveTo(this.x, this.y);
+
+                var a = this.r * Math.cos(8 * Math.PI / 7) + this.x;
+                var b = this.r * Math.sin(8 * Math.PI / 7) + this.y;
+                ctx.lineTo(a, b);
+                ctx.moveTo(this.x, this.y);
+
+                var a = this.r * Math.cos(10 * Math.PI / 7) + this.x;
+                var b = this.r * Math.sin(10 * Math.PI / 7) + this.y;
+                ctx.lineTo(a, b);
+                ctx.moveTo(this.x, this.y);
+
+                var a = this.r * Math.cos(12 * Math.PI / 7) + this.x;
+                var b = this.r * Math.sin(12 * Math.PI / 7) + this.y;
+                ctx.lineTo(a, b);
+                ctx.moveTo(this.x, this.y);
+
+                var a = this.r * Math.cos(14 * Math.PI / 7) + this.x;
+                var b = this.r * Math.sin(14 * Math.PI / 7) + this.y;
+                ctx.lineTo(a, b);
+                ctx.moveTo(this.x, this.y);
+
+                ctx.stroke();
+            }
+
+        }
+
+        var bball1 = new BeachBall(250, 200, 50, 0, 2 * Math.PI, true);
+        bball1.draw();
+
+
+    </script>
+
+</body>
+
+</html>
